@@ -7,18 +7,10 @@ const adminRoute = require("./routes/adminRoutes")
 const blogRoute = require("./routes/blogRoutes")
 
 const app = express();
+app.use(cors());
 connectDB()
-const allowedOrigins = [
-    'http://localhost:5173',
-    "https://quick-blog-rouge.vercel.app"
 
 
-]
-// Middleware
-app.use(cors({
-    origin: allowedOrigins,
-    credentials: true,
-}));
 app.use(express.json());
 
 // Routes
@@ -34,4 +26,3 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 })
 
-module.exports = app; // Export the app for testing purposes
