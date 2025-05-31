@@ -8,17 +8,25 @@ const blogRoute = require("./routes/blogRoutes")
 
 const app = express();
 connectDB()
+const allowedOrigins = [
+    'http://localhost:5173',
+    "https://quick-blog-rouge.vercel.app"
 
+
+]
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: allowedOrigins,
+    credentials: true,
+}));
 app.use(express.json());
 
 // Routes
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
     res.send('API is running...');
 })
-app.use('/api/admin',adminRoute)
-app.use('/api/blog',blogRoute)
+app.use('/api/admin', adminRoute)
+app.use('/api/blog', blogRoute)
 
 const PORT = process.env.PORT || 5000;
 
